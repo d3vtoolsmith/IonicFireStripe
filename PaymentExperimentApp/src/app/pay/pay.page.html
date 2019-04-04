@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Pay</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <label for="cardNumber">Card number</label>
+    <!-- stripe element for CC controls -->
+    <div id="cardNumber" class="payment-field"></div>
+    <ion-badge color="secondary">{{ cardBrand | uppercase }}</ion-badge>
+  </div>
+  <div class="ion-padding">
+    <label for="cardExpiration">Expiration</label>
+    <!-- stripe element for CC controls -->
+    <div id="cardExpiration" class="payment-field"></div>
+  </div>
+  <div class="ion-padding">
+    <label for="cardCVC">CVC</label>
+    <!-- stripe element for CC controls -->
+    <div id="cardCVC" class="payment-field"></div>
+  </div>
+  <div class="ion-padding">
+    <label for="zip">ZIP</label>
+    <input id="zip" class="payment-field" placeholder="12345" maxlength="5" type="tel" [(ngModel)]="zipCode" />
+  </div>
+
+  <!-- stripe element for payment request buttons (apple pay/android pay) -->
+  <div id="paymentRequestButton"></div>
+
+  <div class="processing-status">
+    <div *ngIf="error">
+      <h5>ERROR OCCURED</h5>
+    </div>
+    <div *ngIf="payment">
+      <h5>PAYMENT PROCESSED</h5>
+    </div>
+    <div *ngIf="token">
+      <h5>CARD TOKEN GENERATED</h5>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>    
+    <ion-button expand="block" size="large" (click)="pay()" [disabled]="!isCardValid || paying || payment">
+      <strong *ngIf="!paying && !payment">Pay <span>•</span> ${{ amount }}</strong>
+      <strong *ngIf="paying">Paying...</strong>
+      <strong *ngIf="payment">PAID</strong>
+      <ion-spinner name="crescent" *ngIf="paying"></ion-spinner>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

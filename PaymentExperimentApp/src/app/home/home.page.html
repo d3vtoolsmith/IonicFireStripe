@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/profile">
+        <ion-icon slot="icon-only" name="contact"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      GIVE APP
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/history">
+        <ion-icon slot="icon-only" name="time"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="amount-container">
+    <span class="dollar" [class.fraction]="hasFraction">$</span><span class="amount"
+      [class.fraction]="hasFraction">{{ amount }}</span>
+  </div>
+  <ion-grid class="digit-keyboard">
+    <ion-row *ngFor="let row of digits">
+      <ion-col *ngFor="let digit of row">
+        <ion-button expand="full" (click)="enterDigit(digit)">{{ digit }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" size="large" [routerLink]="['/pay', amount]" routerDirection="forward">
+      Pay
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

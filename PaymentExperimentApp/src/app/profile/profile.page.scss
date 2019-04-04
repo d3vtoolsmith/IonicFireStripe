@@ -1,0 +1,15 @@
+.log-entry {
+	.log-title {
+		background-color: var(--ion-color-primary);
+		color: white;
+		padding: 15px;
+		font-weight: bold;
+	}
+	.log-message {
+	
+	}
+	.log-data {
+		padding: 15px 10px;
+		background-color: #f8f8f8;
+	}
+}
