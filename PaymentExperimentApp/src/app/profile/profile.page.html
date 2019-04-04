@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Logs (Profile)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="log-entry" *ngFor="let log of logs; let i = index">
+    <h4 class="log-title">{{ logs.length-i }} - {{ log.title }}</h4>
+    <p class="log-message" *ngIf="log.message">
+      {{ log.message }}
+    </p>
+    <pre class="log-data">
+          {{ log.data || 'no data' | json }}
+      </pre>
+  </div>
+</ion-content>
