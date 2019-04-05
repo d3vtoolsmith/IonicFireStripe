@@ -15,7 +15,7 @@
       <ion-label>NO PAST PAYMENTS</ion-label>
     </ion-item>
     <ion-item *ngFor="let payment of (payments | async)">
-      <h6>{{ payment.createdDate | date }}</h6>
+      <h6>{{ payment.createdDate | date }} - {{ payment.charge?.source?.brand }}</h6>
       <ion-badge color="success" slot="end">${{ payment.amount }}</ion-badge>
     </ion-item>
   </ion-list>
