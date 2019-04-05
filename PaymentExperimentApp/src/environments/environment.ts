@@ -5,20 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCBwDNAa85_2MsvxwMwkk7KMbP3xuP33Vo",
-    authDomain: "justtest1.firebaseapp.com",
-    databaseURL: "https://justtest1.firebaseio.com",
-    projectId: "justtest1",
-    storageBucket: "justtest1.appspot.com",
-    messagingSenderId: "572764404398"
-    // apiKey: 'AIzaSyDcn9jNKFd4_HeX8Gvgthon63m93j-FoUM',
-    // authDomain: 'ionicexperiments.firebaseapp.com',
-    // databaseURL: 'https://ionicexperiments.firebaseio.com',
-    // projectId: 'ionicexperiments',
-    // storageBucket: 'ionicexperiments.appspot.com',
-    // messagingSenderId: '136627229499'
+    apiKey: "AIzaSyCsElQgTLD1VbPcynH99XiI8C6O0ubCgMQ",
+    authDomain: "ionicpayments1.firebaseapp.com",
+    databaseURL: "https://ionicpayments1.firebaseio.com",
+    projectId: "ionicpayments1",
+    storageBucket: "ionicpayments1.appspot.com",
+    messagingSenderId: "335949177"
   },
-  stripeKey: 'pk_test_QoEHqM0d2AsMyrEwYzGdaZGf00XHOREuGo'
+  stripeKey: 'pk_test_PIApOrlZNvkgeT4WqyavZRTg00Ms798daM'
 };
 
 /*

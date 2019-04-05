@@ -1,5 +1,6 @@
 'use strict';
 
+// load and configure dependencies
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
@@ -10,19 +11,15 @@ const logging = new Logging({
 	projectId: 'ionicexperiments'
 });
 
-// configure stripe sdk with firebase function configuration
-// (SEE ALL CONFIGURATION: firebase functions:config:get)
-// (REMOVE CONFIG ENTRY: firebase functions:config:unset key1)
-// (CLONE CONFIG ENTRIES: firebase functions:config:clone --from <fromProject>)
-
-// TO CONFIGURE: firebase functions:config:set stripe.token="<STRIPE_SECRET_TOKEN>"
 const stripe = require('stripe')(functions.config().stripe.token);
-// TO CONFIGURE: firebase functions:config:set stripe.currency="USD"
 const currency = functions.config().stripe.currency;
 
+// *************************************************
+// ******************* FUNCTIONS *******************
+// *************************************************
 
-//=========================================== FUNCTIONS ===========================================
-// automatically create new stripe customer whenever new user is added to firebase authentication
+// ================================== createStripeCustomer ===========================================
+// Automatically creates new stripe customer whenever new user is added to firebase authentication.
 // (auth database trigger)
 exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
 	// create stripe customer for the user
@@ -43,8 +40,10 @@ exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
 	});
 });
 
-// make payment request for the current user using the specified payment method (token)
+// =========================================== makePayment ===========================================
+// Makes payment request to Stripe for the current user using specified payment method (token).
 // (https api)
+// ===================================================================================================
 exports.makePayment = functions.https.onCall((data, context) => {
 	// make sure request is authenticated
 	if (!context.auth) {
@@ -116,8 +115,10 @@ exports.makePayment = functions.https.onCall((data, context) => {
 });
 
 
+// *************************************************
+// ******************** HELPERS ********************
+// *************************************************
 
-//=========================================== HELPERS ===========================================
 // google logging helper
 function reportError(err, context = {}) {
 	const logName = 'errors';
