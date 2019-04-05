@@ -28,12 +28,14 @@ export class AppComponent {
       this.statusBar.styleBlackOpaque();
       this.splashScreen.hide();
 
+      // IFS: login anonymously using firebase to keep history of payments under the same user
       this.firebaseAuth.auth.signInAnonymously()
         .then(user => {
           this.loggingService.writeLog({ title: 'Signed In Anonymously', data: user });
         }).catch(err => {
           this.loggingService.writeLog({ title: 'Failed to Sign In Anonymously', data: err });
         });
+      // ***IFS
     });
   }
 }

@@ -1,8 +1,8 @@
 {
   "name": "PaymentExperimentApp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "PF CBD",
+  "homepage": "https://clearbluedesign.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

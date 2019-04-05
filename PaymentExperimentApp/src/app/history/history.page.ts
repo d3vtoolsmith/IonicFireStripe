@@ -20,10 +20,12 @@ export class HistoryPage implements OnInit {
     firebaseAuth: AngularFireAuth,
     firestore: AngularFirestore) {
 
+    // IFS: fetch payment history from the firestore for the currently logged in user (anonymously)
     this.payments = firestore.collection<any>('payments',
       ref => ref.where('userId', '==', firebaseAuth.auth.currentUser.uid))
       // .orderBy('createdDate', 'desc')
       .valueChanges();
+    // ***IFS
   }
 
   ionViewWillEnter() {

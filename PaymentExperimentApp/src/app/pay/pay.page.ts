@@ -22,11 +22,19 @@ import { LoggingService } from '../logging.service';
   styleUrls: ['./pay.page.scss'],
 })
 export class PayPage implements OnInit {
+  // IFS: Stripe Elements variables for collecting card info and tokenizing it
   elements: Elements;
   cardNumber: StripeElement;
   cardExpiration: StripeElement;
   cardCVC: StripeElement;
-  zipCode: string;
+
+  token: Token = null;
+  // ***IFS
+  zipCode: string;  // additional zipcode field
+
+  // IFS: Payment confirmation object returned by Firebase function
+  payment: any = null;
+  // ***IFS
 
   cardBrand = '';
   cardValidation: any = {};
@@ -37,11 +45,9 @@ export class PayPage implements OnInit {
       this.zipCode && this.zipCode.length === 5;
   }
 
-  amount = 12;
+  amount: number;
 
   paying = false;
-  payment: any = null;
-  token: Token = null;
   error: Error = null;
 
   private elementOptions: ElementOptions = {
@@ -66,6 +72,7 @@ export class PayPage implements OnInit {
     this.error = null;
     this.paying = true;
 
+    // IFS: Get a secure token representation of the card that can be used to make secure payments
     this.stripeService.createToken(this.cardNumber, { address_zip: this.zipCode })
       .subscribe(result => {
         if (result.error) {
@@ -78,7 +85,7 @@ export class PayPage implements OnInit {
 
         this.loggingService.writeLog({ title: 'Created Stripe Credit Card Token', data: this.token });
 
-        // make payment request to the backend (firebase http function)
+        // IFS: make payment request to the backend (firebase http function)
         const makePaymentFunc = this.firebaseFunctions.httpsCallable('makePayment');
         makePaymentFunc({
           amount: this.amount * 100,  // must be an integer with last 2 digits being cents (78.34 => 7834)
@@ -103,9 +110,11 @@ export class PayPage implements OnInit {
           this.error = err;
           this.loggingService.writeLog({ title: 'Failed to Create Stripe Credit Card Token', data: err });
         });
+    // ***IFS
   }
 
   initStripeElements() {
+    // IFS: initialize plain HTML <div>s into secure card input controls (iframes) using Stripe Elements library
     this.stripeService.elements().subscribe(
       elements => {
         this.elements = elements;
@@ -127,6 +136,7 @@ export class PayPage implements OnInit {
           this.cardCVC.mount('#cardCVC');
         }
 
+        // IFS: this enables platform-specific payment methods like apple pay and google pay
         const paymentRequest = this.getPaymentRequest();
         const paymentRequestButton = this.elements.create('paymentRequestButton', <ElementOptions>{ paymentRequest: paymentRequest });
         paymentRequest.canMakePayment().then(result => {
@@ -140,9 +150,11 @@ export class PayPage implements OnInit {
       err => {
         this.loggingService.writeLog({ title: 'Failed to Initialize Stripe Elements', data: err });
       });
+    // ***IFS
   }
 
   processCardFieldChange(event: any) {
+    // IFS: this enforces client-side card validation and brand (visa/mastercard/etc) extraction for display purposes
     if (event.elementType === 'cardNumber') {
       this.cardBrand = event.brand;
     }
@@ -151,10 +163,12 @@ export class PayPage implements OnInit {
       isValid: !event.error,
       error: event.error ? event.error.message : ''
     };
+    // ***IFS
   }
 
   private getPaymentRequest() {
-    // platform-provided payment processing (Apple Pay, Google Pay, etc.)
+    // IFS: platform-provided payment processing (Apple Pay, Google Pay, etc.)
+    // NOTE: NOT FULLY IMPLEMENTED OR TESTED (REQUIRES ADDITIONAL CONFIGURATION WITH APPLE/GOOGLE)
     return this.stripeService.paymentRequest({
       total: {
         amount: this.amount * 100,
@@ -164,6 +178,7 @@ export class PayPage implements OnInit {
       country: 'US',
       currency: 'usd'
     });
+    // ***IFS
   }
 
   constructor(

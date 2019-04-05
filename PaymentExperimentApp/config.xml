@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.clearbluedesign.paymentexperiment" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Give App</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="petr@clearbluedesign.com" href="http://ionicframework.com/">PF CBD</author>
+    <description>Study in taking payments with Stripe and Firebase.</description>
+    <author email="petr@clearbluedesign.com" href="https://clearbluedesign.com/">PF CBD</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -11,10 +11,10 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <!-- <allow-intent href="*" /> -->
     <allow-navigation href="about:*" />
+    <!-- IFS: allow navigation to stripe servers for Stripe Elements to work (iframes) -->
     <allow-navigation href="*://js.stripe.com/*" />
-    <!-- <allow-navigation href="*://*.cloudfunctions.net/*" /> -->
+    <!-- ***IFS -->
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />

@@ -17,8 +17,6 @@ import { HomePage } from './home.page';
         component: HomePage
       }
     ]),
-
-    // PayPageModule
   ],
   declarations: [HomePage]
 })
