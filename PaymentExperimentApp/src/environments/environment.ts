@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCsElQgTLD1VbPcynH99XiI8C6O0ubCgMQ",
-    authDomain: "ionicpayments1.firebaseapp.com",
-    databaseURL: "https://ionicpayments1.firebaseio.com",
-    projectId: "ionicpayments1",
-    storageBucket: "ionicpayments1.appspot.com",
-    messagingSenderId: "335949177"
+    apiKey: "*******************************************",
+    authDomain: "*******************************************",
+    databaseURL: "*******************************************",
+    projectId: "*******************************************",
+    storageBucket: "*******************************************",
+    messagingSenderId: "*******************************************"
   },
-  stripeKey: 'pk_test_PIApOrlZNvkgeT4WqyavZRTg00Ms798daM'
+  stripeKey: '*******************************************'
 };
 
 /*
