@@ -5,7 +5,10 @@ Implementation of in-app payments using Stripe and Firebase inside an Ionic 4 ap
 
 # Payment Processing Architecture
 
+![payment processing app flow](https://i.ibb.co/BBSjrTQ/Ionic-Fire-Stripe.png)
 
+(3) and (5) ensure that the app securely collects and transmits credit card information to the backend.
+(2) and (7) ensure secure charge of the user's credit card.
 
 # Overview
 ## PaymentExperimentApp 
